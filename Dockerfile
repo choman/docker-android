@@ -1,0 +1,59 @@
+# Base docker image
+FROM debian:sid
+MAINTAINER Jessica Frazelle
+
+ADD https://dl.google.com/linux/direct/google-talkplugin_current_amd64.deb /src/google-talkplugin_current_amd64.deb
+
+ADD https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb /src/google-chrome-stable_current_amd64.deb
+
+# Install Chromium
+RUN mkdir -p /usr/share/icons/hicolor && \
+apt-get update && apt-get install -y \
+ca-certificates \
+gconf-service \
+fonts-liberation \
+hicolor-icon-theme \
+libappindicator1 \
+libasound2 \
+libcanberra-gtk-module \
+libcurl3 \
+libexif-dev \
+libgconf-2-4 \
+libgl1-mesa-dri \
+libgl1-mesa-glx \
+libnspr4 \
+libnss3 \
+libpango1.0-0 \
+libv4l-0 \
+libxss1 \
+libxtst6 \
+wget \
+xdg-utils \
+--no-install-recommends 
+##&& \
+##dpkg -i '/src/google-chrome-stable_current_amd64.deb' && \
+##dpkg -i '/src/google-talkplugin_current_amd64.deb' \
+##&& rm -rf /var/lib/apt/lists/*
+
+RUN \
+  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+  echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list && \
+  apt-get update && \
+  apt-get install -y google-chrome-stable && \
+  rm -rf /var/lib/apt/lists/*
+
+#COPY local.conf /etc/fonts/local.conf
+#ADD arc.tar /data/Default/Extensions/
+##ADD arc_dep.tar /data/Default/Extensions/
+#
+ENV USER=bob
+RUN useradd -ms /bin/bash $USER
+USER $USER
+
+# Autorun chrome
+#ENTRYPOINT [ "/usr/bin/google-chrome"  ]
+#CMD [ "--user-data-dir=/data", "--app-id=emfinbmielocnlhgmfkkmkngdoccbadn"  ]
+#CMD [ "--user-data-dir=/data", "--load-extension=/data/Default/Extensions/emfinbmielocnlhgmfkkmkngdoccbadn"  ]
+CMD [ "--user-data-dir=/data", "--load-extension=/data/Default/Extensions/mfaihdlpglflfgpfjcifdjdjcckigekc"  ]
+CMD [ "/bin/bash" ]
+#CMD [ "--user-data-dir=/data"  ]
