@@ -1,0 +1,9 @@
+FROM thshaw/arc-welder
+
+MAINTAINER thshaw 
+
+ENTRYPOINT [ "/usr/bin/google-chrome"  ]
+
+#This is the app-id of ARC Welder that we installed 
+CMD [ "--no-sandbox", "--user-data-dir=/data", "--app-id=emfinbmielocnlhgmfkkmkngdoccbadn"  ]
+

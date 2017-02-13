@@ -1,0 +1,10 @@
+FROM arc-welder:base
+
+ENTRYPOINT [ "/usr/bin/google-chrome"  ]
+
+#This is the app-id of ARC Welder that we installed 
+##CMD [ "--system-developer-mode", "--no-sandbox", "--user-data-dir=/data", "--app-id=emfinbmielocnlhgmfkkmkngdoccbadn" , "/apps/signal.apk" ]
+##CMD [ "--disable-namespace-sandbox", "--user-data-dir=/data", "--app-id=emfinbmielocnlhgmfkkmkngdoccbadn" , "/apps/signal.apk" ]
+CMD [ "--system-developer-mode", "--user-data-dir=/data", "--app-id=emfinbmielocnlhgmfkkmkngdoccbadn" , "/apps/signal.apk" ]
+#CMD [ "--user-data-dir=/data", "--app-id=emfinbmielocnlhgmfkkmkngdoccbadn"  ]
+
