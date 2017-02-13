@@ -2,6 +2,8 @@
 FROM ubuntu:16.10
 MAINTAINER Jessica Frazelle
 
+RUN apt-get update && apt-get upgrade -y
+
 #ADD https://dl.google.com/linux/direct/google-talkplugin_current_amd64.deb /src/google-talkplugin_current_amd64.deb
 
 #ADD https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb /src/google-chrome-stable_current_amd64.deb
@@ -30,6 +32,7 @@ libxtst6 \
 wget \
 xdg-utils \
 --no-install-recommends 
+
 ##&& \
 ##dpkg -i '/src/google-chrome-stable_current_amd64.deb' && \
 ##dpkg -i '/src/google-talkplugin_current_amd64.deb' \
